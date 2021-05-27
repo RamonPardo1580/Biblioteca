@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'biblioteca',   ##Instalacion de la aplicacion en el servidor
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,5 @@ STATICFILES_DIRS = [
      BASE_DIR / "static/",
 ]
 STATIC_ROOT = '/statico/'
+
+MEDIA_ROOT ='static/imagenes'
