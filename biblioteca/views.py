@@ -27,12 +27,6 @@ def registerPage(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            group = Group.objects.get(name = 'cliente')
-            user.groups.add(group)
-            Cliente.objects.create(
-                user = user,
-                )
-
             messages.success(request,'Se creo una cuenta para ' + username)
 
             return redirect('login')
@@ -103,7 +97,7 @@ def accountSettings(request):
         form = clienteForma(request.POST, request.FILES, instance = cliente)
         if form.is_valid():
             form.save()
-            
+
     contexto = {'form': form}
     return render(request, 'plantillas/perfil_configuracion.html', contexto )
 
