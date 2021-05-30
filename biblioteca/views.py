@@ -73,6 +73,8 @@ def home(request):
                 'entregado': entregado, 'pendiente':pendiente}
     return render(request, 'plantillas/inicio.html', contexto)
 
+
+# Muestra en la pagina del usuario
 @login_required(login_url = 'login')
 @allowed_users(allowed_roles = ['cliente'])
 def userPage(request):
@@ -87,6 +89,7 @@ def userPage(request):
                 'entregado': entregado, 'pendiente':pendiente}
     return render(request, 'plantillas/user.html', contexto)
 
+# configuracion del perfil del usuario
 @login_required(login_url = 'login')
 @allowed_users(allowed_roles = ['cliente'])
 def accountSettings(request):
@@ -133,12 +136,13 @@ def createOrder(request, pk):
     #form = PedidoForma(initial={'cliente':cliente}) #trabajando en esta linea
     if request.method == 'POST':
         #print('Printing POST:', request.POST)
+        form = PedidoForma(request.POST) # esta linea
         formset = OrderFormSet(request.POST, instance = cliente)
         if formset.is_valid():
             formset.save()
             return redirect('/')
 
-    contexto = {'formset': formset}
+    contexto = {'form': formset}
     return render(request, 'plantillas/pedidos_forma.html', contexto)
 
 # Funcion para actualizar el pedido de un cliente
